@@ -1,7 +1,8 @@
-import {Genes,GOL_Genes} from "./genes";
-import {Display, Universe} from "./universe";
-import {UniverseView} from "./universe_view";
-import {ActionController} from "./actions";
+import {ActionController} from "../lib/actions";
+import {Genes, GOL_Genes} from "../lib/genes";
+import {Display, Universe} from "../lib/universe";
+import {UniverseView} from "../lib/universe_view";
+
 
 let display = new Display();
 display.width = 40;
@@ -27,7 +28,7 @@ class Multiverse {
         let cell = document.createElement("td");
         row.appendChild(cell);
 
-        let gene: Genes = GOL_Genes;// Genes.Random(Math.random());
+        let gene: Genes = GOL_Genes; // Genes.Random(Math.random());
         let universe: Universe = new Universe(display, gene).appendTo(cell);
 
         let view = new UniverseView(cell, universe);

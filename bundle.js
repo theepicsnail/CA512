@@ -3,9 +3,27 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-System.register("state", [], function (exports_1, context_1) {
+System.register("endpoints/genes", [], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
+    var Foo;
+    return {
+        setters: [],
+        execute: function () {
+            Foo = (function () {
+                function Foo() {
+                    console.log("Unused");
+                }
+                return Foo;
+            }());
+            exports_1("Foo", Foo);
+            ;
+        }
+    };
+});
+System.register("lib/state", [], function (exports_2, context_2) {
+    "use strict";
+    var __moduleName = context_2 && context_2.id;
     var State;
     return {
         setters: [],
@@ -14,13 +32,13 @@ System.register("state", [], function (exports_1, context_1) {
                 State[State["DEAD"] = 0] = "DEAD";
                 State[State["ALIVE"] = 1] = "ALIVE";
             })(State || (State = {}));
-            exports_1("State", State);
+            exports_2("State", State);
         }
     };
 });
-System.register("genes", ["state"], function (exports_2, context_2) {
+System.register("lib/genes", ["lib/state"], function (exports_3, context_3) {
     "use strict";
-    var __moduleName = context_2 && context_2.id;
+    var __moduleName = context_3 && context_3.id;
     var state_1, Genes, GOL_Genes;
     return {
         setters: [
@@ -116,9 +134,9 @@ System.register("genes", ["state"], function (exports_2, context_2) {
                 };
                 return Genes;
             }());
-            exports_2("Genes", Genes);
+            exports_3("Genes", Genes);
             ;
-            exports_2("GOL_Genes", GOL_Genes = Genes.ByExample(function (n) {
+            exports_3("GOL_Genes", GOL_Genes = Genes.ByExample(function (n) {
                 var neighborsAlive = 0;
                 var isAlive;
                 n.forEach(function (v, idx) {
@@ -141,9 +159,9 @@ System.register("genes", ["state"], function (exports_2, context_2) {
         }
     };
 });
-System.register("universe", ["state"], function (exports_3, context_3) {
+System.register("lib/universe", ["lib/state"], function (exports_4, context_4) {
     "use strict";
-    var __moduleName = context_3 && context_3.id;
+    var __moduleName = context_4 && context_4.id;
     var state_2, Display, Universe;
     return {
         setters: [
@@ -157,7 +175,7 @@ System.register("universe", ["state"], function (exports_3, context_3) {
                 }
                 return Display;
             }());
-            exports_3("Display", Display);
+            exports_4("Display", Display);
             ;
             Universe = (function () {
                 function Universe(displayProps, genes) {
@@ -282,14 +300,14 @@ System.register("universe", ["state"], function (exports_3, context_3) {
                 };
                 return Universe;
             }());
-            exports_3("Universe", Universe);
+            exports_4("Universe", Universe);
             ;
         }
     };
 });
-System.register("universe_view", [], function (exports_4, context_4) {
+System.register("lib/universe_view", [], function (exports_5, context_5) {
     "use strict";
-    var __moduleName = context_4 && context_4.id;
+    var __moduleName = context_5 && context_5.id;
     var UniverseView;
     return {
         setters: [],
@@ -303,13 +321,13 @@ System.register("universe_view", [], function (exports_4, context_4) {
                 UniverseView.prototype.deselect = function () { this.td.style.borderColor = ""; };
                 return UniverseView;
             }());
-            exports_4("UniverseView", UniverseView);
+            exports_5("UniverseView", UniverseView);
         }
     };
 });
-System.register("actions", ["genes", "state"], function (exports_5, context_5) {
+System.register("lib/actions", ["lib/genes", "lib/state"], function (exports_6, context_6) {
     "use strict";
-    var __moduleName = context_5 && context_5.id;
+    var __moduleName = context_6 && context_6.id;
     var genes_1, state_3, Action, BreedAction, Reseed, Mutate, GeneView, RandomGenes, ActionController;
     return {
         setters: [
@@ -476,16 +494,19 @@ System.register("actions", ["genes", "state"], function (exports_5, context_5) {
                 };
                 return ActionController;
             }());
-            exports_5("ActionController", ActionController);
+            exports_6("ActionController", ActionController);
         }
     };
 });
-System.register("main", ["genes", "universe", "universe_view", "actions"], function (exports_6, context_6) {
+System.register("endpoints/main", ["lib/actions", "lib/genes", "lib/universe", "lib/universe_view"], function (exports_7, context_7) {
     "use strict";
-    var __moduleName = context_6 && context_6.id;
-    var genes_2, universe_1, universe_view_1, actions_1, display, Multiverse, m, onFrame;
+    var __moduleName = context_7 && context_7.id;
+    var actions_1, genes_2, universe_1, universe_view_1, display, Multiverse, m, onFrame;
     return {
         setters: [
+            function (actions_1_1) {
+                actions_1 = actions_1_1;
+            },
             function (genes_2_1) {
                 genes_2 = genes_2_1;
             },
@@ -494,9 +515,6 @@ System.register("main", ["genes", "universe", "universe_view", "actions"], funct
             },
             function (universe_view_1_1) {
                 universe_view_1 = universe_view_1_1;
-            },
-            function (actions_1_1) {
-                actions_1 = actions_1_1;
             }
         ],
         execute: function () {

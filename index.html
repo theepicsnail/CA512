@@ -41,6 +41,8 @@
       </div>
     </div>
 
-    <script>System.import("main");</script>
+    <script>
+    System.import("endpoints/" + (location.hash.substring(1)||"main"));
+    </script>
   </body>
 </html>
