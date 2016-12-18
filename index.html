@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.41/system.js"></script>
+    <script src = "bundle.js"></script>
+    <style>
+      body {
+        margin: 0px
+      }
+
+      canvas {
+        image-rendering: pixelated;
+      }
+
+      td{
+        padding:0;
+        border: 4px solid;
+      }
+
+      #multiverse {
+        float:left;
+      }
+
+      #controls {
+        display:table-cell;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="http://localhost:35729/livereload.js?snipver=1"></script>
+    <div>
+      <table id="multiverse"></table>
+      <br />
+      <div id="controls">
+        <select id="actions"></select>
+        <br />
+        <span id="help"></span>
+        <br />
+        <div id="actionDiv">
+
+        </div>
+      </div>
+    </div>
+
+    <script>System.import("main");</script>
+  </body>
+</html>

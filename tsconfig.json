@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "outFile": "./bundle.js",
+        "module": "system",
+        "target": "es5",
+        "noImplicitAny": false,
+        "sourceMap": false,
+        "typeRoots": [
+          "../node_modules/@types"
+        ]
+    }
+}
